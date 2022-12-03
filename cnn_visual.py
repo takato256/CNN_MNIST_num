@@ -1,15 +1,14 @@
 import tensorflow as tf
 import tensorflow.keras.layers as kl
-
 import numpy as np
-
 import feature_visual
 import filter_visual
-
 import argparse as arg
 import os
+import streamlit as st
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # TFメッセージ非表示
+st.set_option('deprecation.showPyplotGlobalUse', False) # streamlit上での警告を非表示
 
 
 # CNN
@@ -50,14 +49,17 @@ class trainer(object):
 
     def train(self, train_img, train_lab, batch_size, epochs, input_shape, test_img):
         # 学習
-        self.model.fit(train_img, train_lab, batch_size=batch_size, epochs=epochs)
+        with st.spinner("学習中‥"):
+            self.model.fit(train_img, train_lab, batch_size=batch_size, epochs=epochs)
 
-        print("___Training finished\n\n")
 
         # 特徴マップ可視化
-        feature_visual.feature_vi(self.model, input_shape, train_img)
+        with st.spinner("特徴マップを読み込み中‥"):
+            feature_visual.feature_vi(self.model, input_shape, train_img)
+        
         # フィルタ可視化
-        filter_visual.filter_vi(self.model)
+        with st.spinner("フィルタを読み込み中‥"):
+            filter_visual.filter_vi(self.model)
 
 
 def main():
@@ -65,25 +67,26 @@ def main():
     parser = arg.ArgumentParser(description='CNN Feature-map & Filter Visualization')
     parser.add_argument('--batch_size', '-b', type=int, default=256,
                         help='ミニバッチサイズの指定(デフォルト値=256)')
-    parser.add_argument('--epoch', '-e', type=int, default=10,
+    parser.add_argument('--epoch', '-e', type=int, default=3,
                         help='学習回数の指定(デフォルト値=10)')
     args = parser.parse_args()
 
     # データセット取得、前処理
-    (train_img, train_lab), (test_img, _) = tf.keras.datasets.mnist.load_data()
-    train_img = tf.convert_to_tensor(train_img, np.float32)
-    train_img /= 255
-    train_img = train_img[:, :, :, np.newaxis]
+    with st.spinner("データを取得・前処理中"):
+        (train_img, train_lab), (test_img, _) = tf.keras.datasets.mnist.load_data()
+        train_img = tf.convert_to_tensor(train_img, np.float32)
+        train_img /= 255
+        train_img = train_img[:, :, :, np.newaxis]
 
-    test_img = tf.convert_to_tensor(test_img, np.float32)
-    test_img /= 255
-    test_img = train_img[:, :, :, np.newaxis]
+        test_img = tf.convert_to_tensor(test_img, np.float32)
+        test_img /= 255
+        test_img = train_img[:, :, :, np.newaxis]
 
     # 学習開始
     print("___Start training...")
 
     input_shape = (28, 28, 1)
-
+    
     Trainer = trainer(10, input_shape)
     Trainer.train(train_img, train_lab, batch_size=args.batch_size,
                     epochs=args.epoch, input_shape=input_shape, test_img=test_img)
