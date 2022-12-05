@@ -20,8 +20,8 @@ def filter_vi(model):
         filter_num = target_layer.shape[3]
 
         # ウィンドウ名定義
-        fig = plt.gcf()
-        fig.canvas.set_window_title(vi_layer[i].name + " filter visualization")
+        # fig = plt.gcf()
+        # fig.canvas.set_window_title(vi_layer[i].name + " filter visualization")
 
         # 出力
         for j in range(filter_num):

@@ -38,8 +38,8 @@ def feature_vi(model, input_shape, test_img):
         feature = feature_map.shape[2]
 
         # ウィンドウ名定義
-        fig = plt.gcf()
-        fig.canvas.set_window_title(feature_vi[i + 1].name + " feature-map visualization")
+        # fig = plt.gcf()
+        # fig.canvas.set_window_title(feature_vi[i + 1].name + " feature-map visualization")
 
         # 出力
         for j in range(feature):
