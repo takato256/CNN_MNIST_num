@@ -19,10 +19,6 @@ def filter_vi(model):
         target_layer = vi_layer[i].get_weights()[0]
         filter_num = target_layer.shape[3]
 
-        # ウィンドウ名定義
-        # fig = plt.gcf()
-        # fig.canvas.set_window_title(vi_layer[i].name + " filter visualization")
-
         # 出力
         for j in range(filter_num):
             plt.subplots_adjust(wspace=0.4, hspace=0.8)
