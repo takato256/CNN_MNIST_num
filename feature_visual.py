@@ -39,7 +39,7 @@ def feature_vi(model, input_shape, test_img):
         
         # 層の名前を表示
         layer_names = ["畳み込み層 1", "プーリング層 1", "畳み込み層 2", "プーリング層 2"]
-        st.markdown("### {}").format(layer_names[i])
+        st.markdown("### {}".format(layer_names[i]))
 
         # 出力
         for j in range(feature):

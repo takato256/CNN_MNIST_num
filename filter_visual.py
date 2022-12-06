@@ -21,7 +21,7 @@ def filter_vi(model):
 
         # フィルターの名前を表示
         filter_names = ["畳み込み層 1 のフィルター", "畳み込み層 2 のフィルター"]
-        st.markdown("### {}").format(filter_names[i])
+        st.markdown("### {}".format(filter_names[i]))
         # 出力
         for j in range(filter_num):
             plt.subplots_adjust(wspace=0.4, hspace=0.8)
