@@ -69,7 +69,7 @@ def main():
     with st.sidebar:
         st.markdown("※注意")
         st.markdown("学習中は値を変更しないでください")
-        batch_size = st.number_input("ミニバッチサイズ", 1, 1000, 256, step=1)
+        batch_size = st.selectbox(label="ミニバッチサイズ", options=[256, 1, 32, 64, 128, 512, 1024])
         epoch_num = st.number_input("エポック数", 1, 100, 3, step=1)
         st.markdown("ミニバッチサイズとは？")
         st.markdown("""データセットをいくつかのグループに分けた、各グループの数のことです。
