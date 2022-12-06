@@ -63,6 +63,8 @@ class trainer(object):
 
 
 def main():
+    st.markdown("## 畳み込みニューラルネットワーク(CNN)")
+    
     if st.button("学習開始"):
         # コマンドラインオプション作成
         parser = arg.ArgumentParser(description='CNN Feature-map & Filter Visualization')
