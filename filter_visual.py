@@ -25,6 +25,5 @@ def filter_vi(model):
             plt.subplot(int(filter_num / 6 + 1), 6, j + 1)
             plt.xticks([])
             plt.yticks([])
-            plt.xlabel(f'filter {j}')
             plt.imshow(target_layer[:, :, 0, j], cmap="gray")
         st.pyplot()

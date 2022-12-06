@@ -43,6 +43,5 @@ def feature_vi(model, input_shape, test_img):
             plt.subplot(int(feature / 6 + 1), 6, j + 1)
             plt.xticks([])
             plt.yticks([])
-            plt.xlabel(f'filter {j}')
             plt.imshow(feature_map[:, :, j])
         st.pyplot()
