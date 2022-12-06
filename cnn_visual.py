@@ -64,13 +64,20 @@ class trainer(object):
 
 def main():
     st.markdown("## 畳み込みニューラルネットワーク(CNN)")
-    
+    st.markdown("このサイトでは数字を学習させることができます")
+    st.markdown("学習開始ボタンを押す度に、違う数字が表示されます")
+    with st.sidebar:
+        st.markdown("※注意")
+        st.markdown("学習中は値を変更しないでください")
+        batch_size = st.number_input("ミニバッチサイズ", 1, 1000, 256, step=1)
+        epoch_num = st.number_input("エポック数", 1, 100, 3, step=1)
+        
     if st.button("学習開始"):
         # コマンドラインオプション作成
         parser = arg.ArgumentParser(description='CNN Feature-map & Filter Visualization')
-        parser.add_argument('--batch_size', '-b', type=int, default=256,
+        parser.add_argument('--batch_size', '-b', type=int, default=batch_size,
                             help='ミニバッチサイズの指定(デフォルト値=256)')
-        parser.add_argument('--epoch', '-e', type=int, default=3,
+        parser.add_argument('--epoch', '-e', type=int, default=epoch_num,
                             help='学習回数の指定(デフォルト値=10)')
         args = parser.parse_args()
 
