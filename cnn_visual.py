@@ -63,33 +63,32 @@ class trainer(object):
 
 
 def main():
-    # コマンドラインオプション作成
-    parser = arg.ArgumentParser(description='CNN Feature-map & Filter Visualization')
-    parser.add_argument('--batch_size', '-b', type=int, default=256,
-                        help='ミニバッチサイズの指定(デフォルト値=256)')
-    parser.add_argument('--epoch', '-e', type=int, default=3,
-                        help='学習回数の指定(デフォルト値=10)')
-    args = parser.parse_args()
+    if st.button("学習開始"):
+        # コマンドラインオプション作成
+        parser = arg.ArgumentParser(description='CNN Feature-map & Filter Visualization')
+        parser.add_argument('--batch_size', '-b', type=int, default=256,
+                            help='ミニバッチサイズの指定(デフォルト値=256)')
+        parser.add_argument('--epoch', '-e', type=int, default=3,
+                            help='学習回数の指定(デフォルト値=10)')
+        args = parser.parse_args()
 
-    # データセット取得、前処理
-    with st.spinner("データを取得・前処理中"):
-        (train_img, train_lab), (test_img, _) = tf.keras.datasets.mnist.load_data()
-        train_img = tf.convert_to_tensor(train_img, np.float32)
-        train_img /= 255
-        train_img = train_img[:, :, :, np.newaxis]
+        # データセット取得、前処理
+        with st.spinner("データを取得・前処理中"):
+            (train_img, train_lab), (test_img, _) = tf.keras.datasets.mnist.load_data()
+            train_img = tf.convert_to_tensor(train_img, np.float32)
+            train_img /= 255
+            train_img = train_img[:, :, :, np.newaxis]
 
-        test_img = tf.convert_to_tensor(test_img, np.float32)
-        test_img /= 255
-        test_img = train_img[:, :, :, np.newaxis]
+            test_img = tf.convert_to_tensor(test_img, np.float32)
+            test_img /= 255
+            test_img = train_img[:, :, :, np.newaxis]
 
-    # 学習開始
-    print("___Start training...")
-
-    input_shape = (28, 28, 1)
+        # 学習開始
+        input_shape = (28, 28, 1)
     
-    Trainer = trainer(10, input_shape)
-    Trainer.train(train_img, train_lab, batch_size=args.batch_size,
-                    epochs=args.epoch, input_shape=input_shape, test_img=test_img)
+        Trainer = trainer(10, input_shape)
+        Trainer.train(train_img, train_lab, batch_size=args.batch_size,
+                        epochs=args.epoch, input_shape=input_shape, test_img=test_img)
 
 
 if __name__ == '__main__':
