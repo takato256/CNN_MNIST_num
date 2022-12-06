@@ -22,7 +22,7 @@ def filter_vi(model):
         # 出力
         for j in range(filter_num):
             plt.subplots_adjust(wspace=0.4, hspace=0.8)
-            plt.subplot(filter_num / 6 + 1, 6, j + 1)
+            plt.subplot(int(filter_num / 6 + 1), 6, j + 1)
             plt.xticks([])
             plt.yticks([])
             plt.xlabel(f'filter {j}')

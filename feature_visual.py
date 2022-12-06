@@ -40,7 +40,7 @@ def feature_vi(model, input_shape, test_img):
         # 出力
         for j in range(feature):
             plt.subplots_adjust(wspace=0.4, hspace=0.8)
-            plt.subplot(feature / 6 + 1, 6, j + 1)
+            plt.subplot(int(feature / 6 + 1), 6, j + 1)
             plt.xticks([])
             plt.yticks([])
             plt.xlabel(f'filter {j}')
